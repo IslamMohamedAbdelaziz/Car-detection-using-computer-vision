@@ -278,8 +278,7 @@ def main(argv):
     empty_frame_counter = 0
     last_sc = np.array([])
     last_rects = np.array([])
-    output = 'resul3.mp4'
-    clip = VideoFileClip("original.mp4")
+    clip = VideoFileClip(inputfile)
     create_video(clip,outputfile)
     
 if __name__ == "__main__":
