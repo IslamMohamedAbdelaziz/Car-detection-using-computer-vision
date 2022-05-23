@@ -243,13 +243,47 @@ import imageio
 #imageio.plugins.ffmpeg.download()
 from moviepy.editor import VideoFileClip
 from IPython.display import HTML
-empty_frame_counter = 0
-last_sc = np.array([])
-last_rects = np.array([])
-output = 'resul3.mp4'
-clip = VideoFileClip("original.mp4")
-video_clip = clip.fl_image(process_image)
-get_ipython().run_line_magic('time', 'video_clip.write_videofile(output, audio=False)')
+import sys
+ 
+def main(argv):
+    inputfile = ''
+    outputfile = ''
+#     try:
+#         opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+#     except getopt.GetoptError:
+#         print ('test.py -i <inputfile> -o <outputfile>')
+#         sys.exit(1)
+ 
+    
+ 
+    for arg in sys.argv:
+        if arg == '-h':
+            print ('test.py <inputfile> <outputfile> <--d>') #--d for debug
+#             sys.exit(1)
+        elif arg == '--d':
+            global debug
+            debug = 1
+            print('d')
+            
+    n = len(sys.argv)
+    try:
+        for i in range(0, n):
+            inputfile = sys.argv[1]
+            outputfile = sys.argv[2]
+        print ('Input file is "', inputfile)
+        print ('Output file is "', outputfile)
+    except:
+        print ('test.py <inputfile> <outputfile> <--d>') #--d for debug
+ 
+    empty_frame_counter = 0
+    last_sc = np.array([])
+    last_rects = np.array([])
+    output = 'resul3.mp4'
+    clip = VideoFileClip("original.mp4")
+    create_video(clip,outputfile)
+    
+if __name__ == "__main__":
+    main(sys.argv[1:])
 
 
 # In[ ]:
